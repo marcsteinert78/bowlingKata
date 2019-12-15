@@ -6,7 +6,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class BowlingScoreControllerTest {
 
-
     private BowlingScoreController bowlingScoreController = new BowlingScoreController(1);
 
     @Test
@@ -23,7 +22,7 @@ class BowlingScoreControllerTest {
 
     @Test
     public void testZeroGame() {
-        handleBatchThrows(10, 0);
+        handleBatchThrows(20, 0);
         assertEquals(0, bowlingScoreController.calcResultOfPlayer(1));
     }
 
