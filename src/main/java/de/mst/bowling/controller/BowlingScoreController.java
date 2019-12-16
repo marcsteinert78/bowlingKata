@@ -20,10 +20,13 @@ public class BowlingScoreController {
     }
 
     //TODO: handling for more than one player
-    //TODO: explicit handling of 10 frame(bonus throws act in test as 11th frame) / limiting of frames per game
 
     public void handleThrow(int pinsDown) {
         handleBonus(pinsDown);
+        if(currentFrame == 10){
+            getPreviousFrame(1).setBonusScore(getPreviousFrame(1).getBonusScore() + pinsDown);
+            return;
+        }
         if (this.firstThrow) {
             getCurrentPlayer().getFrames().add(new Frame(pinsDown));
             if (pinsDown == MAX_SCORE) {
