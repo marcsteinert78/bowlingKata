@@ -4,9 +4,6 @@ import de.mst.bowling.model.Frame;
 import de.mst.bowling.model.Game;
 import de.mst.bowling.model.Player;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class BowlingScoreController {
 
     private static int MAX_SCORE = 10;
@@ -16,11 +13,10 @@ public class BowlingScoreController {
     private Game game;
 
     private int currentFrame = 0;
-    private int currentPlayer = 0;
     private boolean firstThrow = true;
 
     public BowlingScoreController(int numberOfPlayers) {
-        this.game = new Game(createPlayerList(numberOfPlayers));
+        this.game = new Game(new Player("Player 1"));
     }
 
     //TODO: handling for more than one player
@@ -31,7 +27,7 @@ public class BowlingScoreController {
         if (this.firstThrow) {
             getCurrentPlayer().getFrames().add(new Frame(pinsDown));
             if (pinsDown == MAX_SCORE) {
-                setAwaitStrikeBonusForFrame(STRIKE_BONUS);
+                setAwaitsBonusForFrame(STRIKE_BONUS);
                 currentFrame++;
             } else {
                 this.firstThrow = false;
@@ -39,7 +35,7 @@ public class BowlingScoreController {
         } else {
             getCurrentFrame().setSecondThrow(pinsDown);
             if (pinsDown + getCurrentFrame().getFirstThrow() == MAX_SCORE) {
-                setAwaitStrikeBonusForFrame(SPARE_BONUS);
+                setAwaitsBonusForFrame(SPARE_BONUS);
             }
             this.firstThrow = true;
             currentFrame++;
@@ -58,16 +54,8 @@ public class BowlingScoreController {
         }
     }
 
-    private List<Player> createPlayerList(int numberOfPlayers) {
-        List<Player> players = new ArrayList<>();
-        for (int i = 0; i < numberOfPlayers; i++) {
-            players.add(new Player("Player " + i));
-        }
-        return players;
-    }
-
     private Player getCurrentPlayer() {
-        return this.game.getPlayers().get(currentPlayer);
+        return this.game.getPlayer();
     }
 
     private Frame getCurrentFrame() {
@@ -83,11 +71,11 @@ public class BowlingScoreController {
                 getPreviousFrame(behind).getAwaitsBonus() : 0;
     }
 
-    private void setAwaitStrikeBonusForFrame(int bonus) {
+    private void setAwaitsBonusForFrame(int bonus) {
         getCurrentFrame().setAwaitsBonus(bonus);
     }
 
-    public int calcResultOfPlayer(int i) {
-        return this.game.getPlayers().get(i - 1).calcResultOfPlayer();
+    public int calcResultOfPlayer() {
+        return this.game.calcResultOfPlayer();
     }
 }

@@ -18,18 +18,4 @@ public class Player {
         this.name = name;
     }
 
-    public int calcResultOfPlayer() {
-        int result = 0;
-        int counter = 1;
-        List<Frame> frames = this.getFrames();
-        System.out.println("Score for " + name + ":");
-        for(Frame frame : frames){
-            result += (frame.getFrameScore());
-            System.out.println("Frame "+counter+":"+frame.getFrameScore());
-            counter++;
-        }
-        System.out.println("Total score: " + result);
-        return result;
-    }
-
 }

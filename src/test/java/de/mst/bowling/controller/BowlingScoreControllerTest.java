@@ -10,20 +10,20 @@ class BowlingScoreControllerTest {
 
     @Test
     public void testAllStrikes() {
-        handleBatchThrows(11, 10); // 2 Bonus throws = 11 Rounds
-        assertEquals(300, bowlingScoreController.calcResultOfPlayer(1));
+        doBatchThrows(11, 10); // 2 Bonus throws = 11 Rounds
+        assertEquals(300, bowlingScoreController.calcResultOfPlayer());
     }
 
     @Test
     public void testAllOnes() {
-        handleBatchThrows(20, 1);
-        assertEquals(20, bowlingScoreController.calcResultOfPlayer(1));
+        doBatchThrows(20, 1);
+        assertEquals(20, bowlingScoreController.calcResultOfPlayer());
     }
 
     @Test
     public void testZeroGame() {
-        handleBatchThrows(20, 0);
-        assertEquals(0, bowlingScoreController.calcResultOfPlayer(1));
+        doBatchThrows(20, 0);
+        assertEquals(0, bowlingScoreController.calcResultOfPlayer());
     }
 
     @Test
@@ -31,9 +31,9 @@ class BowlingScoreControllerTest {
         bowlingScoreController.handleThrow(5);
         bowlingScoreController.handleThrow(5);
         bowlingScoreController.handleThrow(3);
-        handleBatchThrows(17, 0);
+        doBatchThrows(17, 0);
 
-        assertEquals(16, bowlingScoreController.calcResultOfPlayer(1));
+        assertEquals(16, bowlingScoreController.calcResultOfPlayer());
     }
 
     @Test
@@ -41,16 +41,15 @@ class BowlingScoreControllerTest {
         bowlingScoreController.handleThrow(10);
         bowlingScoreController.handleThrow(3);
         bowlingScoreController.handleThrow(4);
-        handleBatchThrows(16, 0);
+        doBatchThrows(16, 0);
 
-        assertEquals(24, bowlingScoreController.calcResultOfPlayer(1));
+        assertEquals(24, bowlingScoreController.calcResultOfPlayer());
     }
 
-    private void handleBatchThrows(int numberOfThrows, int score) {
+    private void doBatchThrows(int numberOfThrows, int score) {
         for (int i = 0; i < numberOfThrows; i++) {
             bowlingScoreController.handleThrow(score);
         }
     }
-
 
 }

@@ -12,8 +12,8 @@ public class Frame {
 
     private int firstThrow;
     @Setter private int secondThrow;
+    @Setter private int bonusScore;
     @Setter private int awaitsBonus;
-    @Setter private int bonusScore; // TODO: validation
 
     public Frame(int firstThrow) {
         this.firstThrow = firstThrow;
